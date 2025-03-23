@@ -11,6 +11,14 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
   const { mode, systemMode, setMode } = useColorScheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  // Ensure default theme is dark when the component mounts
+  React.useEffect(() => {
+    if (!mode) {
+      setMode('dark'); // Set default to dark mode
+    }
+  }, [mode, setMode]);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -21,6 +29,7 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
     setMode(targetMode);
     handleClose();
   };
+
   if (!mode) {
     return (
       <Box
@@ -37,11 +46,13 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
       />
     );
   }
+
   const resolvedMode = (systemMode || mode) as 'light' | 'dark';
   const icon = {
     light: <LightModeIcon />,
     dark: <DarkModeIcon />,
   }[resolvedMode];
+
   return (
     <React.Fragment>
       <IconButton
@@ -58,7 +69,7 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id="color-scheme-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
