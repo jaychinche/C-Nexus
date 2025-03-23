@@ -49,7 +49,7 @@ Forums Page
 <img width="1440" alt="Screenshot 2025-03-23 at 10 40 18 PM" src="https://github.com/user-attachments/assets/72211024-caba-4d36-a460-61d364126727" />
 
 SignUp Page
-<img width="1440" alt="Screenshot 2025-03-23 at 10 40 52 PM" src="https://github.com/user-attachments/assets/0fc0bfeb-08fa-4629-8270-d1e6bbf0b2ac" />
+<img width="1440" alt="Screenshot 2025-03-23 at 10 41 11 PM" src="https://github.com/user-attachments/assets/4a3c4f9e-5757-48db-998a-5e53ee4e22b2" />
 
 SignIn
 <img width="1440" alt="Screenshot 2025-03-23 at 10 40 52 PM" src="https://github.com/user-attachments/assets/6dace5d2-e352-487f-871b-e6339fa2652c" />
@@ -61,17 +61,8 @@ LightTheam
 <img width="1440" alt="Screenshot 2025-03-23 at 10 40 39 PM" src="https://github.com/user-attachments/assets/87b36792-c5e1-47f5-b470-805519955f64" />
 
 
-
-
-
-
-
-
 Footer 
 <img width="1440" alt="Screenshot 2025-03-23 at 10 39 48 PM" src="https://github.com/user-attachments/assets/8e572e9b-0f19-46f7-bddd-ce08daff599d" />
-
-
-
 
 
 
