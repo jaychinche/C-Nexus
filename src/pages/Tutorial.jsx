@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
+import { motion, AnimatePresence } from "framer-motion";
 import { styled } from "@mui/material/styles";
 import AppTheme from "../shared-theme/AppTheme";
 import NavBar from "../components/NavBar";
@@ -34,6 +34,54 @@ const BackgroundColorContainer = styled("div")(({ theme }) => ({
     background:
       "radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 80%)",
     zIndex: -1,
+  },
+}));
+
+// Styled component for the 3D card effect
+const CardContainer = styled("div")(({ theme }) => ({
+  perspective: "50em",
+  width: "100%",
+  maxWidth: "320px", // Ensure cards don't exceed a certain width
+  margin: "0 auto", // Center the card
+}));
+
+const StyledCard = styled("div")(({ theme }) => ({
+  position: "relative",
+  width: "100%",
+  padding: "2em",
+  color: "#fff",
+  transform: "rotateY(30deg) rotateX(15deg)",
+  transformStyle: "preserve-3d",
+  transition: "transform 1s",
+  backgroundColor: "#000", // Black background for the card
+  borderRadius: "1em",
+  "&:hover": {
+    transform: "rotateY(-30deg) rotateX(-15deg)",
+  },
+}));
+
+const Layers = styled("div")(({ theme }) => ({
+  position: "absolute",
+  left: 0,
+  top: 0,
+  width: "100%",
+  height: "100%",
+  transformStyle: "preserve-3d",
+  zIndex: -1,
+}));
+
+const Layer = styled("div")(({ theme }) => ({
+  position: "absolute",
+  left: 0,
+  top: 0,
+  width: "100%",
+  height: "100%",
+  borderRadius: "1em",
+  backgroundImage: "var(--bi)",
+  transform: "translateZ(var(--tz))",
+  boxShadow: "0 0 0.5em #000d inset",
+  "&:last-child": {
+    boxShadow: "0 0 0.5em #000d inset, 0 0 5px #000",
   },
 }));
 
@@ -116,234 +164,234 @@ const Tutorial = () => {
             {/* Tutorial Card */}
             {tutorials.map((tutorial, index) => (
               <Grid item xs={12} sm={6} md={4} key={tutorial.id}>
-                <motion.div
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card
-                    sx={{
-                      backgroundColor: (theme) =>
-                        theme.palette.background.paper,
-                      borderRadius: 2,
-                      boxShadow: 3,
-                      transition: "0.3s",
-                      "&:hover": { boxShadow: 6 },
-                      textAlign: "center",
-                      minHeight: 400,
-                      minWidth: 300,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Typography variant="h6" gutterBottom>
-                        {tutorial.title}
-                      </Typography>
-                      <center>
-                        <video
-                          height="120"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          style={{ pointerEvents: "none", borderRadius: "8px" }}
+                <CardContainer>
+                  <StyledCard>
+                    <Layers>
+                      {[...Array(10)].map((_, i) => (
+                        <Layer key={i} style={{ "--tz": `${i * -4}px` }} />
+                      ))}
+                    </Layers>
+                    <motion.div
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Typography variant="h6" gutterBottom>
+                          {tutorial.title}
+                        </Typography>
+                        <center>
+                          <video
+                            height="120"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{
+                              pointerEvents: "none",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <source
+                              src="/videos/tutorial.mp4"
+                              type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
+                          </video>
+                        </center>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ mt: 2 }}
                         >
-                          <source src="/videos/tutorial.mp4" type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </center>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mt: 2 }}
-                      >
-                        {tutorial.description}
-                      </Typography>
-                      <br />
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                        <Button
-                          variant="contained"
-                          fullWidth
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.mode === "dark" ? "#444" : "#000",
-                            color: "#fff",
-                            "&:hover": { backgroundColor: "#FF1493" },
-                            mt: 2,
-                          }}
-                          onClick={() =>
-                            window.open(
-                              "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
-                              "_blank"
-                            )
-                          }
+                          {tutorial.description}
+                        </Typography>
+                        <br />
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                         >
-                          View Tutorial
-                        </Button>
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#FF1493",
+                              color: "#fff",
+                              "&:hover": { backgroundColor: "#FF1493" },
+                              mt: 2,
+                            }}
+                            onClick={() =>
+                              window.open(
+                                "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
+                                "_blank"
+                              )
+                            }
+                          >
+                            View Tutorial
+                          </Button>
+                        </motion.div>
+                      </CardContent>
+                    </motion.div>
+                  </StyledCard>
+                </CardContainer>
               </Grid>
             ))}
 
             {/* Reference Card */}
             {references.map((reference, index) => (
               <Grid item xs={12} sm={6} md={4} key={reference.id}>
-                <motion.div
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card
-                    sx={{
-                      backgroundColor: (theme) =>
-                        theme.palette.background.paper,
-                      borderRadius: 2,
-                      boxShadow: 3,
-                      transition: "0.3s",
-                      "&:hover": { boxShadow: 6 },
-                      textAlign: "center",
-                      minHeight: 400,
-                      minWidth: 300,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Typography variant="h6" gutterBottom>
-                        {reference.title}
-                      </Typography>
-                      <center>
-                        <video
-                          height="120"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          style={{ pointerEvents: "none", borderRadius: "8px" }}
+                <CardContainer>
+                  <StyledCard>
+                    <Layers>
+                      {[...Array(10)].map((_, i) => (
+                        <Layer key={i} style={{ "--tz": `${i * -4}px` }} />
+                      ))}
+                    </Layers>
+                    <motion.div
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Typography variant="h6" gutterBottom>
+                          {reference.title}
+                        </Typography>
+                        <center>
+                          <video
+                            height="120"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{
+                              pointerEvents: "none",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <source
+                              src="/videos/tutorial.mp4"
+                              type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
+                          </video>
+                        </center>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ mt: 2 }}
                         >
-                          <source src="/videos/tutorial.mp4" type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </center>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mt: 2 }}
-                      >
-                        {reference.description}
-                      </Typography>
-                      <br />
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                        <Button
-                          variant="contained"
-                          fullWidth
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.mode === "dark" ? "#444" : "#000",
-                            color: "#fff",
-                            "&:hover": { backgroundColor: "#FF1493" },
-                            mt: 2,
-                          }}
-                          onClick={() =>
-                            window.open(
-                              "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
-                              "_blank"
-                            )
-                          }
+                          {reference.description}
+                        </Typography>
+                        <br />
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                         >
-                          View Tutorial
-                        </Button>
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#FF1493",
+                              color: "#fff",
+                              "&:hover": { backgroundColor: "#FF1493" },
+                              mt: 2,
+                            }}
+                            onClick={() =>
+                              window.open(
+                                "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
+                                "_blank"
+                              )
+                            }
+                          >
+                            View Tutorial
+                          </Button>
+                        </motion.div>
+                      </CardContent>
+                    </motion.div>
+                  </StyledCard>
+                </CardContainer>
               </Grid>
             ))}
 
             {/* Articles Card */}
             {articles.map((article, index) => (
               <Grid item xs={12} sm={6} md={4} key={article.id}>
-                <motion.div
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card
-                    sx={{
-                      backgroundColor: (theme) =>
-                        theme.palette.background.paper,
-                      borderRadius: 2,
-                      boxShadow: 3,
-                      transition: "0.3s",
-                      "&:hover": { boxShadow: 6 },
-                      textAlign: "center",
-                      minHeight: 400,
-                      minWidth: 300,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Typography variant="h6" gutterBottom>
-                        {article.title}
-                      </Typography>
-                      <center>
-                        <video
-                          height="120"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          style={{ pointerEvents: "none", borderRadius: "8px" }}
+                <CardContainer>
+                  <StyledCard>
+                    <Layers>
+                      {[...Array(10)].map((_, i) => (
+                        <Layer key={i} style={{ "--tz": `${i * -4}px` }} />
+                      ))}
+                    </Layers>
+                    <motion.div
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <CardContent sx={{ p: 3 }}>
+                        <Typography variant="h6" gutterBottom>
+                          {article.title}
+                        </Typography>
+                        <center>
+                          <video
+                            height="120"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{
+                              pointerEvents: "none",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <source
+                              src="/videos/tutorial.mp4"
+                              type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
+                          </video>
+                        </center>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ mt: 2 }}
                         >
-                          <source src="/videos/tutorial.mp4" type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </center>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ mt: 2 }}
-                      >
-                        {article.description}
-                      </Typography>
-                      <br />
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                        <Button
-                          variant="contained"
-                          fullWidth
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.mode === "dark" ? "#444" : "#000",
-                            color: "#fff",
-                            "&:hover": { backgroundColor: "#FF1493" },
-                            mt: 2,
-                          }}
-                          onClick={() =>
-                            window.open(
-                              "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
-                              "_blank"
-                            )
-                          }
+                          {article.description}
+                        </Typography>
+                        <br />
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                         >
-                          View Tutorial
-                        </Button>
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#FF1493",
+                              color: "#fff",
+                              "&:hover": { backgroundColor: "#FF1493" },
+                              mt: 2,
+                            }}
+                            onClick={() =>
+                              window.open(
+                                "https://www.youtube.com/watch?v=j8nAHeVKL08&list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&index=1",
+                                "_blank"
+                              )
+                            }
+                          >
+                            View Tutorial
+                          </Button>
+                        </motion.div>
+                      </CardContent>
+                    </motion.div>
+                  </StyledCard>
+                </CardContainer>
               </Grid>
             ))}
           </Grid>
