@@ -32,7 +32,7 @@ const Preloader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/dashboard-main"); // Navigate to the dashboard after 3 seconds
-    }, 3000); // 3 seconds delay
+    }, 5000); // 3 seconds delay
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [navigate]);
