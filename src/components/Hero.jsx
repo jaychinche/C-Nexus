@@ -46,7 +46,7 @@ export default function HeroCommon() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            pt: { xs: 30, sm: 0 },
+            pt: { xs: 20, sm: 30, md: 10 }, 
             pb: { xs: 8, sm: 12 },
           }}
         >
