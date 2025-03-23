@@ -99,7 +99,7 @@ export default function NavBar() {
               Tutorials
               </Button>
               <Button component={Link} to="/reference" variant="text" color="info" size="small">
-               Reference
+               References
               </Button>
               <Button component={Link} to="/article" variant="text" color="info" size="small">
               Articles
@@ -140,7 +140,7 @@ export default function NavBar() {
                 Tutorials
                 </Button>
                 <Button component={Link} to="/reference" variant="text" color="info" size="small">
-                Reference
+                References
                 </Button>
                 <Button component={Link} to="/article" variant="text" color="info" size="small">
                 Articles
