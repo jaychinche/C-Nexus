@@ -149,6 +149,7 @@ const Tutorial = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <br></br>
             <Typography
               variant="h4"
               align="center"
@@ -239,6 +240,7 @@ const Tutorial = () => {
               </Grid>
             ))}
 
+            <br></br><br></br>
             {/* Reference Card */}
             {references.map((reference, index) => (
               <Grid item xs={12} sm={6} md={4} key={reference.id}>
@@ -316,6 +318,7 @@ const Tutorial = () => {
                 </CardContainer>
               </Grid>
             ))}
+            <br></br><br></br>
 
             {/* Articles Card */}
             {articles.map((article, index) => (
