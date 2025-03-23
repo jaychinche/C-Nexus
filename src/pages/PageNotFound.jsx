@@ -26,7 +26,7 @@ export default function PageNotFound() {
           gap: 2,
         }}
       >
-        <br></br><br></br>
+        <br></br><br></br><br></br>
          <Typography variant="h5" color="textSecondary">
           Oops! The page you are looking for does not exist.
         </Typography>
