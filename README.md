@@ -39,7 +39,7 @@ Dashboard
 Dashboard - C++ Learning Hub
 <img width="1440" alt="Screenshot 2025-03-23 at 10 39 41 PM" src="https://github.com/user-attachments/assets/06ccdd5a-3cfe-49d4-af49-6170daf4cffa" />
 
-Tutorials Pagw
+Tutorials Page
 <img width="1440" alt="Screenshot 2025-03-23 at 10 39 55 PM" src="https://github.com/user-attachments/assets/26545143-1906-42a2-a767-e90b0a33f9c9" />
 
 Reference Page 
