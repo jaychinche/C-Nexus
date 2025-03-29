@@ -14,7 +14,7 @@ const BackgroundColorContainer = styled("div")(({ theme }) => ({
 backgroundImage: "radial-gradient(at 50% 50%, rgba(0, 0, 0, 0.5), black)",
 
   backgroundRepeat: "no-repeat",
-  ...theme.applyStyles("light", {
+  ...theme.applyStyles("dark", {
   backgroundImage: "radial-gradient(at 50% 50%, rgba(0, 0, 0, 0.5), black)",
   }),
   "&::before": {
