@@ -5,25 +5,13 @@ import { useNavigate } from "react-router-dom"; // For navigation
 import AppTheme from "../shared-theme/AppTheme";
 
 // Styled component for the background container
-const BackgroundColorContainer = styled("div")(({ theme }) => ({
+const BackgroundColorContainer = styled("div")(() => ({
   height: "100vh",
+  width: "100vw",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  position: "relative",
-backgroundImage: "radial-gradient(at 50% 50%, rgba(0, 0, 0, 0.5), black)",
-
-  backgroundRepeat: "no-repeat",
-  ...theme.applyStyles("dark", {
-  backgroundImage: "radial-gradient(at 50% 50%, rgba(0, 0, 0, 0.5), black)",
-  }),
-  "&::before": {
-    content: "''",
-    position: "absolute",
-    inset: 0,
-   backgroundImage: "radial-gradient(at 50% 50%, rgba(0, 0, 0, 0.5), black)",
-    zIndex: -1,
-  },
+  backgroundColor: "black", // Fully black background
 }));
 
 const Preloader = () => {
@@ -32,8 +20,8 @@ const Preloader = () => {
   // Simulate loading delay and navigate to the dashboard
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/dashboard-main"); // Navigate to the dashboard after 3 seconds
-    }, 5000); // 3 seconds delay
+      navigate("/dashboard-main"); // Navigate to the dashboard after 5 seconds
+    }, 5000);
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [navigate]);
